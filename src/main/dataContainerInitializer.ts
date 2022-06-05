@@ -3,6 +3,7 @@ import { LocalPostData } from '../data/localStorage/localPostData'
 import { FullPost } from '../data/posts'
 import { User } from '../data/users'
 import { LocalDataStorage } from '../data/localStorage/localDataStorage'
+import {PostApi} from "../data/api/postData";
 
 const initialUsers: User[] = [
   {
@@ -60,6 +61,6 @@ export const createDataContainer = (): Promise<DataContainer> => {
     initialPosts.forEach(post => postStorage.setValue(post.id, post))
 
   return Promise.resolve({
-    posts: new LocalPostData(postStorage)
+    posts: new PostApi()
   })
 }
