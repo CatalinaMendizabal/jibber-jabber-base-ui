@@ -1,5 +1,6 @@
 import axios from "axios";
 import UserService from "./userService";
+import _kc from "../main/keycloak";
 
 const Methods = {
     GET: 'GET',
@@ -7,12 +8,12 @@ const Methods = {
     DELETE: 'DELETE',
 };
 
-const _axios = axios.create();
+const axiosInstance = axios.create();
 
 const configure = () => {
-    _axios.interceptors.request.use((config) => {
+    axiosInstance.interceptors.request.use((config) => {
         if (UserService.isLoggedIn()) {
-            console.log(UserService.getToken());
+            console.log(_kc.idToken, "token");
             const cb = () => {
                 // @ts-ignore
                 config.headers.Authorization = `Bearer ${UserService.getToken()}`;
@@ -23,7 +24,7 @@ const configure = () => {
     });
 };
 
-const getAxiosClient = () => _axios;
+const getAxiosClient = () => axiosInstance;
 
 const Service = {
     Methods,

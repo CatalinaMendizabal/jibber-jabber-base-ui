@@ -1,6 +1,7 @@
 import axios from "axios";
 import {FullPost, NewPost, Post, PostData} from "../posts";
 import UserService from "../../utils/userService";
+import _kc from "../../main/keycloak";
 
 const jjAxios = axios.create({
     baseURL: "http://localhost:8086/post",
@@ -14,6 +15,7 @@ const jjAxios = axios.create({
 export class PostApi implements PostData {
 
     answerPost(postId: string, answer: NewPost): Promise<FullPost> {
+
         return jjAxios.post<NewPost, FullPost>(`/${postId}/reply`, answer);
     }
 
@@ -44,6 +46,7 @@ export const getPostsByUser = async (userId: string): Promise<Post[]> => {
 
 jjAxios.interceptors.request.use((config) => {
     if (UserService.isLoggedIn()) {
+        console.log(_kc.idToken, "token");
         const cb = () => {
             // @ts-ignore
             config.headers.Authorization = `Bearer ${UserService.getToken()}`;

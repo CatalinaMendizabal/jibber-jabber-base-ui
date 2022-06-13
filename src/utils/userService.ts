@@ -1,16 +1,9 @@
-import Keycloak, {KeycloakError, KeycloakPromise} from 'keycloak-js';
-
-const _kc = new Keycloak('/keycloak.json')
-
+import _kc from "../main/keycloak";
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
  */
-const initKeycloak = () : KeycloakPromise<boolean, KeycloakError> => {
-    return _kc.init({
-        onLoad: 'login-required',
-        silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-        pkceMethod: 'S256',
-    })
+const initKeycloak = () : Promise<boolean> => {
+    return _kc.login().then(() => true)
 };
 
 const doLogin = _kc.login;

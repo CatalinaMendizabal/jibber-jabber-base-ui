@@ -6,6 +6,8 @@ import { DataContainer, DataContext } from '../data/dataContext'
 import { MainRouter } from './mainRouter'
 import { createDataContainer } from './dataContainerInitializer'
 import { UserLoader } from './userLoader'
+import {ReactKeycloakProvider} from '@react-keycloak/web'
+import keycloak from "./keycloak";
 
 export const App = () => {
   const [dataContainer, setDataContainer] = useState<DataContainer | undefined>()
@@ -19,12 +21,15 @@ export const App = () => {
     return (<div>Loading ...</div>)
 
   return (
-    <DataContext.Provider value={dataContainer}>
-      <BrowserRouter>
-        <UserLoader>
-          <MainRouter/>
-        </UserLoader>
-      </BrowserRouter>
-    </DataContext.Provider>
+      <ReactKeycloakProvider authClient={keycloak}>
+        <DataContext.Provider value={dataContainer}>
+          <BrowserRouter>
+            <UserLoader>
+              <MainRouter/>
+            </UserLoader>
+          </BrowserRouter>
+        </DataContext.Provider>
+      </ReactKeycloakProvider>
+
   )
 }
