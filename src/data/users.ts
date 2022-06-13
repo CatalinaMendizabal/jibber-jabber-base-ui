@@ -3,11 +3,15 @@ export type User = {
   displayName: string
   username: string
   avatar: string
+  bio?: string
 }
 
-export const getUserData = (): Promise<User> => Promise.resolve({
-  id: '1',
-  displayName: 'Bird Person',
-  username: 'little_bird',
-  avatar: '/generic-avatar.jpg',
-})
+export interface UserData {
+  getCurrentUser(): Promise<User | undefined>
+
+  getUserById(userId: string): Promise<User | undefined>
+
+  isFollowed(userId: string): Promise<boolean | undefined>
+
+  toggleFollow(userId: string): Promise<void>
+}
