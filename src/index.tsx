@@ -8,30 +8,30 @@ import UserService from "./utils/userService";
 import Service from "./utils/service";
 
 const rootElement = document.getElementById('root');
-const root = createRoot(rootElement!);
+/*const root = createRoot(rootElement!);
 
 root.render(
   <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    {/!* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. *!/}
     <CssBaseline />
     <App />
   </ThemeProvider>,
-);
+);*/
 
-// const renderApp = () => createRoot(rootElement!);
+const renderApp = () => createRoot(rootElement!);
 
-// const keycloakPromise = UserService.initKeycloak();
-// keycloakPromise.then((authenticated: boolean) => {
-//     if (!authenticated) {
-//         console.log("user is not authenticated..!");
-//     }
-//     console.log("user is logged in!")
-//     renderApp().render(
-//         <ThemeProvider theme={theme}>
-//             {/* CssBaseline kickstart an elegant, conse baseline to build upon. */}
-//             <CssBaseline />
-//             <App />
-//         </ThemeProvider>,
-//     );
-// }).catch(console.error);
-// Service.configure();
+const keycloakPromise = UserService.initKeycloak();
+keycloakPromise.then((authenticated: boolean) => {
+    if (!authenticated) {
+        console.log("user is not authenticated..!");
+    }
+    console.log("user is logged in!")
+    renderApp().render(
+        <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, conse baseline to build upon. */}
+            <CssBaseline />
+            <App />
+        </ThemeProvider>,
+    );
+}).catch(console.error);
+Service.configure();

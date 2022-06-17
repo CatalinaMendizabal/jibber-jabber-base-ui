@@ -25,7 +25,7 @@ const createItems = (userId: string): ItemProps[] => [
   },
   {
     title: 'Profile',
-    path: '/users/' + userId,
+    path: '/user/' + userId,
     iconComponent: Person,
   },
 ]

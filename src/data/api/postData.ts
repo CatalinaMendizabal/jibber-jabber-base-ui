@@ -4,11 +4,9 @@ import UserService from "../../utils/userService";
 import _kc from "../../main/keycloak";
 
 const jjAxios = axios.create({
-    baseURL: "http://localhost:8086/post",
+    baseURL: "http://localhost:8086/post/",
     headers: {
-        crossDomain: true,
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Content-type": "application/json"
     }
 })
 
@@ -26,12 +24,16 @@ export class PostApi implements PostData {
     getFeedPosts(): Promise<Post[]> {
         console.log("getFeedPosts");
         console.log(UserService.getToken());
-        return jjAxios.get("").then(response => response.data);
+        return jjAxios.get("").then(response => response.data.content);
     }
 
     getFullPostById(id: string): Promise<FullPost | undefined> {
         console.log("getFullPostById");
         return jjAxios.get(`/${id}`).then(response => response.data);
+    }
+
+    getPostsByUser(userId: string): Promise<Post[]> {
+        return jjAxios.get(`/user/${userId}`).then(res => res.data.content)
     }
 
 }
@@ -46,7 +48,6 @@ export const getPostsByUser = async (userId: string): Promise<Post[]> => {
 
 jjAxios.interceptors.request.use((config) => {
     if (UserService.isLoggedIn()) {
-        console.log(_kc.idToken, "token");
         const cb = () => {
             // @ts-ignore
             config.headers.Authorization = `Bearer ${UserService.getToken()}`;

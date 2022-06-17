@@ -13,6 +13,7 @@ export type FullPost = Post & {
 export type NewPost = Omit<Post, 'id'>
 
 export interface PostData {
+
   getFeedPosts(): Promise<Post[]>
 
   getFullPostById(id: string): Promise<FullPost | undefined>

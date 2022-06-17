@@ -51,7 +51,6 @@ export const Home = () => {
     <MainFrame title="Home">
       <Container>
         <CreatePostCard buttonMessage="Post it!" placeholder="What's happening?" onPost={handleCreatePost}/>
-
         <Feed posts={posts}/>
       </Container>
     </MainFrame>

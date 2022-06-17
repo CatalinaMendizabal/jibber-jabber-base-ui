@@ -4,6 +4,8 @@ import { FullPost } from '../data/posts'
 import { User } from '../data/users'
 import { LocalDataStorage } from '../data/localStorage/localDataStorage'
 import {PostApi} from "../data/api/postData";
+import {LocalUserData} from "../data/localStorage/localUserData";
+import {UserApi} from "../data/api/UserData";
 
 const initialUsers: User[] = [
   {
@@ -61,11 +63,13 @@ export const createDataContainer = (): Promise<DataContainer> => {
   if (postStorage.getAll().length === 0)
     initialPosts.forEach(post => postStorage.setValue(post.id, post))
 
-  // const userStorage = new LocalDataStorage<User>(LocalUserData.type)
-  // if (userStorage.getAll().length === 0)
-  //   initialUsers.forEach(user => userStorage.setValue(user.id, user))
+  const userStorage = new LocalDataStorage<User>(LocalUserData.type)
+  if (userStorage.getAll().length === 0)
+    initialUsers.forEach(user => userStorage.setValue(user.id, user))
 
+  // @ts-ignore
   return Promise.resolve({
+    users: new UserApi(),
     posts: new PostApi()
   })
 }

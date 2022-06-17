@@ -8,8 +8,8 @@ export const MainRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/users/:userId" element={<UserProfile/>}/>
-      <Route path="/posts/:postId" element={<PostPage/>}/>
+      <Route path="/user/:userId" element={<UserProfile/>}/>
+      <Route path="/post/:postId" element={<PostPage/>}/>
     </Routes>
   )
 }

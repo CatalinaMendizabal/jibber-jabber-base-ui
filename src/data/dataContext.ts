@@ -6,6 +6,7 @@ import { LocalDataStorage } from './localStorage/localDataStorage'
 import { User, UserData } from './users'
 import { LocalUserData } from './localStorage/localUserData'
 import {PostApi} from "./api/postData";
+import {UserApi} from "./api/UserData";
 
 export interface DataContainer {
   posts: PostData
@@ -14,7 +15,7 @@ export interface DataContainer {
 
 export const DataContext = createContext<DataContainer>({
   // posts: new LocalPostData(new LocalDataStorage<FullPost>(LocalPostData.type)),
-  users: new LocalUserData(new LocalDataStorage<User>(LocalUserData.type), ''),
+  users: new UserApi(),
   posts: new PostApi()
 })
 

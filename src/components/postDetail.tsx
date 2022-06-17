@@ -16,7 +16,7 @@ const answerStyle: SxProps<Theme> = {
 }
 
 export const PostDetail = ({post, onPostAnswer}: PostCardProps) => {
-  return (
+    return (
     <Container>
       <PostCard post={post}/>
 

@@ -25,10 +25,10 @@ export const PostCard = ({post, sx, shouldNavigate = false}: PostCardProps) => {
 
   const handleContentClick = useCallback(() => {
     if (shouldNavigate)
-      navigate(`/posts/${post.id}`)
+      navigate(`/post/${post.id}`)
   }, [navigate, post.id])
 
-  const handleHeaderClick = useCallback(() => navigate(`/users/${post.user.id}`), [navigate, post.user.id])
+  const handleHeaderClick = useCallback(() => navigate(`/user/${post.user.id}`), [navigate, post.user.id])
 
   return (
     <Card sx={mergedCardStyle}>
