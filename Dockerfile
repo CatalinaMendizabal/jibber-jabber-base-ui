@@ -8,6 +8,6 @@ RUN npm -s run build
 
 # Stage 2, based on Nginx
 FROM nginx:1.17.0-alpine
+COPY nginx/conf.d/server.conf /etc/nginx/conf.d/default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
-COPY nginx/conf.d/server.conf /etc/nginx/nginx.conf
 EXPOSE 80
