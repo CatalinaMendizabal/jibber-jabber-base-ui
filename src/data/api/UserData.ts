@@ -10,6 +10,13 @@ const userData = axios.create({
     }
 })
 
+const followAxios = axios.create({
+    baseURL: "http://localhost:8086/follow/",
+    headers: {
+        "Content-type": "application/json"
+    }
+})
+
 export class UserApi implements UserData {
     getCurrentUser(): Promise<User | undefined> {
         return userData.get("").then(res => res.data)
@@ -20,14 +27,11 @@ export class UserApi implements UserData {
     }
 
     isFollowed(userId: string): Promise<boolean | undefined> {
-        return Promise.resolve(undefined);
-
-        // TODO
+        return followAxios.get(`/isFollowed/${userId}`).then(res => res.data)
     }
 
     toggleFollow(userId: string): Promise<void> {
-        return Promise.resolve(undefined);
-        // TODO
+        return followAxios.post(`/${userId}`)
     }
 
     searchUser(userName: string): Promise<User> | undefined {
@@ -36,6 +40,17 @@ export class UserApi implements UserData {
 }
 
 userData.interceptors.request.use((config) => {
+    if (UserService.isLoggedIn()) {
+        const cb = () => {
+            // @ts-ignore
+            config.headers.Authorization = `Bearer ${UserService.getToken()}`;
+            return Promise.resolve(config);
+        };
+        return UserService.updateToken(cb);
+    }
+});
+
+followAxios.interceptors.request.use((config) => {
     if (UserService.isLoggedIn()) {
         const cb = () => {
             // @ts-ignore
