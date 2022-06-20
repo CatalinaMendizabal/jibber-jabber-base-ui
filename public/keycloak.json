@@ -1,6 +1,6 @@
 {
   "realm": "Jibber-Jabber",
-  "auth-server-url": "https://jibberjabberg2.ml/auth/",
+  "auth-server-url": "https://jj-group2.ml/auth/",
   "ssl-required": "external",
   "resource": "jibber-jabber-front",
   "public-client": true,

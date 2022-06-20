@@ -4,14 +4,14 @@ import UserService from "../../utils/userService";
 import _kc from "../../main/keycloak";
 
 const userData = axios.create({
-    baseURL: "https://jibberjabberg2.ml/user/",
+    baseURL: "https://jj-group2.ml/user/",
     headers: {
         "Content-type": "application/json"
     }
 })
 
 const followAxios = axios.create({
-    baseURL: "https://jibberjabberg2.ml/follow/",
+    baseURL: "https://jj-group2.ml/follow/",
     headers: {
         "Content-type": "application/json"
     }

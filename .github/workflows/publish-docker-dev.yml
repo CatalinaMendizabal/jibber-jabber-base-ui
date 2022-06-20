@@ -9,11 +9,11 @@ on:
   schedule:
     - cron: '35 21 * * *'
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "develop" ]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -79,14 +79,14 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Update server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.JJ_PROD_HOSTS }}
-          username: ${{ secrets.JJ_PROD_USERNAME }}
-          key: ${{ secrets.JJ_PROD_KEY }}
-          script: |
-            cd JJ-Backend
-            sudo docker compose stop
-            sudo docker compose pull
-            sudo docker compose up --detach
+#      - name: Update server
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.JJ_DEV_HOSTS }}
+#          username: ${{ secrets.JJ_DEV_USERNAME }}
+#          key: ${{ secrets.JJ_DEV_KEY }}
+#          script: |
+#            cd JJ-Backend
+#            sudo docker compose stop
+#            sudo docker compose pull
+#            sudo docker compose up --detach
