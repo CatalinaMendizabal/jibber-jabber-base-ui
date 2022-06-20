@@ -4,7 +4,7 @@ import UserService from "../../utils/userService";
 import _kc from "../../main/keycloak";
 
 const jjAxios = axios.create({
-    baseURL: "http://localhost:8086/post/",
+    baseURL: "https://jibberjabberg2.ml/post/",
     headers: {
         "Content-type": "application/json"
     }
